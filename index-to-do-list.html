@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Listner - simple to adder </title>
+
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul li {
+        color: whitesmoke;
+        background-color: blue;
+        width: max-content;
+        padding: 10px;
+        margin: 5px;
+        transition: all linear .3s;
+        font-size: 16px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+
+    li:hover {
+        opacity: 0.8;
+    }
+    .done{
+        background-color: yellowgreen;
+        color: whitesmoke;
+           }
+
+    .butt {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 0; 
+        background-color: tomato;
+        color: whitesmoke;
+        margin-left: 100px;
+    }
+
+</style>
+
+</head>
+<body>
+    <input id="userinput" type="text" placeholder="do me today">
+    <button id="enter">Click</button>
+    <ul>
+        <!-- <li>asdaskjd</li>
+        <li>dfsdf</li>
+        <li>sdfskjd</li>
+        <li>sdfsdd</li>
+        <li>afsdfkjd</li>
+        <li>assdfkjd</li> -->
+    </ul>
+
+    <script>
+
+        var btn = document.getElementById("enter");
+        var input = document.getElementById("userinput");
+        var ul = document.querySelector("ul");
+
+        function addClassDone() {
+            if(this.classList.contains("done")) {
+                this.classList.remove("done");
+            } else {
+                this.classList.add("done");
+            }
+        };
+
+        function removeDone(){
+                this.parentNode.parentNode.removeChild(this.parentNode)
+            }
+
+        function inputLen(){
+            return input.value.length;
+        };
+
+        function createNewElement(){
+            var li = document.createElement("li");
+            var butt = document.createElement("button");
+            butt.classList.add("butt");
+            li.appendChild(document.createTextNode(input.value));
+            li.addEventListener("click", addClassDone);
+            butt.appendChild(document.createTextNode("Delete me"))
+            butt.addEventListener("click", removeDone); 
+            li.appendChild(butt);
+            ul.appendChild(li);
+        
+            input.value = "";
+        };
+
+        function kepressAddElem(event){
+            if(inputLen() > 0 && event.keyCode === 13){
+                createNewElement();}
+        };
+
+        function clickAddElem(){
+            if(inputLen() > 0){
+                createNewElement();
+            }
+        };
+
+        btn.addEventListener("click", clickAddElem);
+        input.addEventListener("keypress", kepressAddElem);
+
+    </script>
+
+
+</body>
+</html>
